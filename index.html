@@ -1,1 +1,620 @@
-//Senior Calculator Placeholder
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#F7F5F2">
+<meta name="description" content="Find your ideal senior portrait package in 60 seconds and get a personalized recommendation. Fully guided, heirloom-quality, stress-free. Metro Detroit.">
+<title>Find Your Perfect Senior Portrait Package | Two Wild Souls Photography</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=optional"
+  media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=optional">
+</noscript>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #F7F5F2;
+  --surface: #ECEAE6;
+  --text:    #2E2F2C;
+  --text2:   #6B6E6A;
+  --accent:  #7C8A5A;
+  --accent2: #6F8191;
+  --gold:    #C7B27A;
+  --cta:     #3F4438;
+  --error:   #bf5040;
+  --faint:   rgba(46,47,44,0.1);
+  --border:  rgba(124,138,90,0.25);
+}
+
+html, body {
+  background: var(--bg); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-weight: 300;
+  min-height: 100dvh;
+  height: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 20px; border-bottom: 1px solid var(--faint);
+  position: sticky; top: 0; background: var(--bg); z-index: 100;
+}
+.logo-wrap { display: flex; flex-direction: column; gap: 2px; }
+.logo-name { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 400; letter-spacing: 0.04em; color: var(--text); }
+.logo-name em { font-style: italic; color: var(--gold); }
+.logo-sub { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text2); }
+.header-badge {
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+  background: rgba(124,138,90,0.1); border: 1px solid var(--border);
+  padding: 5px 10px; border-radius: 100px; white-space: nowrap;
+}
+
+.progress-shell { background: var(--surface); padding: 14px 20px; border-bottom: 1px solid var(--faint); }
+.progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.progress-step-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text2); }
+.progress-pct { font-size: 11px; color: var(--accent); }
+.progress-track { height: 3px; background: var(--faint); border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--gold)); border-radius: 2px; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
+
+.dots { display: flex; justify-content: center; gap: 8px; padding: 10px 0 0; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(46,47,44,0.15); transition: all 0.3s; }
+.dot.active { background: var(--accent); transform: scale(1.4); }
+.dot.done   { background: var(--gold); transform: scale(1.1); }
+
+main {
+  padding: 0 20px 120px;
+  max-width: 540px;
+  margin: 0 auto;
+  flex: 1 1 auto;
+}
+
+.intro-block { padding: 20px 0 6px; animation: fadeUp 0.5s ease both; }
+.intro-eyebrow { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.intro-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 7vw, 46px); font-weight: 300; line-height: 1.1; color: var(--text); margin-bottom: 10px; }
+.intro-headline em { font-style: italic; color: var(--accent); }
+.intro-body { font-size: 13px; line-height: 1.6; color: var(--text2); margin-bottom: 14px; }
+.intro-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+.pill { font-size: 10px; letter-spacing: 0.06em; color: var(--accent2); border: 1px solid rgba(111,129,145,0.3); padding: 4px 10px; border-radius: 100px; }
+
+.reviews-badge { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 20px; padding: 16px; background: white; border: 1px solid rgba(46,47,44,0.1); border-radius: 8px; }
+.reviews-stars { display: flex; gap: 3px; }
+.reviews-meta { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text2); }
+.reviews-score { font-weight: 500; color: var(--text); font-size: 14px; }
+.reviews-divider { color: var(--faint); }
+.reviews-count { font-size: 12px; }
+
+.intro-cta {
+  width: 100%; background: var(--cta); color: var(--bg); border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-weight: 500; font-size: 14px;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 18px; cursor: pointer;
+  transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 6px;
+}
+.intro-cta:hover { background: #2e3128; }
+.intro-trust { text-align: center; font-size: 12px; color: var(--text2); margin-top: 14px; }
+
+.question-wrap { padding: 36px 0 0; animation: fadeUp 0.4s ease both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+.question-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 6.5vw, 36px); font-weight: 300; line-height: 1.2; color: var(--text); margin-bottom: 8px; }
+.question-hint { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 28px; font-style: italic; }
+
+.options-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px; }
+.opt-btn {
+  background: white; border: 1.5px solid rgba(46,47,44,0.18); color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 15px; font-weight: 300;
+  padding: 16px 20px; text-align: left; cursor: pointer; transition: all 0.2s ease;
+  display: flex; align-items: center; gap: 14px; border-radius: 6px; -webkit-tap-highlight-color: transparent;
+}
+.opt-btn:active, .opt-btn.selected { background: rgba(124,138,90,0.07); border-color: var(--accent); box-shadow: 0 0 0 2px rgba(124,138,90,0.15); }
+.opt-check { width: 20px; height: 20px; border: 1.5px solid rgba(46,47,44,0.2); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.opt-btn.selected .opt-check { background: var(--accent); border-color: var(--accent); }
+.opt-btn.selected .opt-check::after { content: ''; width: 6px; height: 6px; background: white; border-radius: 50%; }
+.opt-text { flex: 1; }
+.opt-label { display: block; line-height: 1.3; }
+.opt-sub { display: block; font-size: 12px; color: var(--text2); margin-top: 3px; }
+
+.val-msg { font-size: 12px; color: var(--error); padding: 0 0 8px; display: none; }
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border-top: 1px solid var(--faint);
+  padding: 14px 20px max(14px, env(safe-area-inset-bottom));
+  padding-bottom: max(14px, env(safe-area-inset-bottom));
+  display: flex;
+  gap: 10px;
+  z-index: 200;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.btn-back {
+  background: transparent; border: 1.5px solid rgba(46,47,44,0.15); color: var(--text2);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-size: 13px; letter-spacing: 0.06em;
+  padding: 0 20px; cursor: pointer; min-height: 52px; transition: all 0.2s;
+  flex-shrink: 0; border-radius: 6px; -webkit-tap-highlight-color: transparent;
+}
+.btn-back:hover { border-color: var(--text); color: var(--text); }
+.btn-next {
+  flex: 1; background: var(--cta); color: var(--bg); border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-weight: 500; font-size: 14px;
+  letter-spacing: 0.1em; text-transform: uppercase; min-height: 52px;
+  cursor: pointer; transition: background 0.2s; border-radius: 6px; -webkit-tap-highlight-color: transparent;
+}
+.btn-next:hover { background: #2e3128; }
+.btn-next:disabled { background: var(--surface); color: var(--text2); cursor: not-allowed; }
+
+.redirect-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 65vh; padding: 40px 20px; text-align: center; animation: fadeUp 0.5s ease both; }
+.redirect-spinner { width: 48px; height: 48px; border-radius: 50%; border: 3px solid var(--faint); border-top-color: var(--accent); animation: spin 1s linear infinite; margin-bottom: 28px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.redirect-package { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 5vw, 30px); font-style: italic; font-weight: 300; color: var(--cta); margin-bottom: 6px; line-height: 1.2; }
+.redirect-tagline { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+.redirect-phrase { font-size: 13px; color: var(--text2); margin-bottom: 28px; transition: opacity 0.45s ease; min-height: 20px; }
+.redirect-summary { background: white; border: 1px solid rgba(46,47,44,0.12); border-radius: 8px; padding: 20px 24px; width: 100%; max-width: 340px; text-align: left; }
+.summary-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--faint); font-size: 13px; gap: 12px; }
+.summary-row:last-child { border-bottom: none; }
+.summary-label { color: var(--text2); flex-shrink: 0; }
+.summary-value { color: var(--text); text-align: right; font-weight: 400; }
+.summary-value.gold { color: var(--gold); font-weight: 500; }
+
+.footer { text-align: center; margin-top: 40px; font-size: 11px; color: var(--text2); opacity: 0.6; }
+
+@media (min-width: 600px) {
+  header, .progress-shell { padding-left: 40px; padding-right: 40px; }
+  main { padding: 0 40px 120px; }
+  .bottom-nav { padding: 18px 40px max(18px, env(safe-area-inset-bottom)); }
+  .intro-headline { font-size: 52px; }
+}
+@media (min-width: 900px) {
+  main { flex: 1; max-width: 600px; width: 100%; margin: 0 auto; padding: 0 0 140px; }
+  .bottom-nav {
+    left: 50%; right: auto;
+    transform: translateX(-50%);
+    width: 600px;
+    border-left: 1px solid var(--faint);
+    border-right: 1px solid var(--faint);
+    border-radius: 0 0 8px 8px;
+  }
+  .btn-next { max-width: 260px; margin-left: auto; }
+}
+
+/* ══ HERO ══ */
+#introHero {
+  display: none;
+  width: 100%;
+  min-height: calc(100svh - 57px);
+  flex-shrink: 0;
+  align-self: stretch;
+  position: relative;
+  overflow: hidden;
+  background: #0d1a2e;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+#introHero.visible { display: flex; }
+
+.hero-eyebrow { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(199,178,122,0.85); margin-bottom: 14px; }
+.hero-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 8vw, 52px); font-weight: 300; line-height: 1.08; color: white; margin-bottom: 14px; max-width: 500px; }
+.hero-headline em { font-style: italic; color: var(--gold); }
+.hero-body { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.65); margin-bottom: 24px; max-width: 380px; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 28px; }
+.hero-pill { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 100px; }
+.hero-stars { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; justify-content: center; }
+.hero-stars-icons { display: flex; gap: 2px; }
+.hero-stars-label { font-size: 12px; color: rgba(255,255,255,0.55); }
+.hero-stars-label strong { color: white; }
+.hero-cta {
+  background: var(--gold); color: #1a1a1a; border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 18px 32px; border-radius: 6px; cursor: pointer; transition: background 0.2s;
+  display: flex; align-items: center; gap: 10px;
+}
+.hero-cta:hover { background: #d4c08a; }
+.hero-trust { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 14px; letter-spacing: 0.05em; }
+
+.hero-cta-fixed {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: #0d1a2e; border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 16px 20px max(16px, env(safe-area-inset-bottom));
+  flex-direction: column; align-items: center; gap: 8px; z-index: 200;
+}
+.hero-cta-fixed.visible { display: flex; }
+.hero-cta-fixed .hero-cta { width: 100%; justify-content: center; }
+.hero-cta-fixed .hero-trust { color: rgba(255,255,255,0.4); }
+
+@media (min-width: 768px) {
+  .hero-cta-fixed { display: none !important; }
+  #introHero { padding: 64px 40px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <span class="logo-name">Two Wild <em>Souls</em> Photography</span>
+    <span class="logo-sub">Metro Detroit Senior Portraits</span>
+  </div>
+  <span class="header-badge">Limited spots</span>
+</header>
+
+<div id="introHero">
+  <p class="hero-eyebrow">Personalized Senior Portrait Consultation</p>
+  <h1 class="hero-headline">Find your <em>perfect</em><br>senior session.</h1>
+  <p class="hero-body">Answer 4 quick questions and we'll match your senior to the right experience — products, planning level, and package that fits your family.</p>
+  <div class="hero-pills">
+    <span class="hero-pill">Heirloom Albums</span>
+    <span class="hero-pill">Framed Wall Portraits</span>
+    <span class="hero-pill">Fully Guided</span>
+    <span class="hero-pill">Full-Service Experience</span>
+  </div>
+  <div class="hero-stars">
+    <div class="hero-stars-icons">
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+    </div>
+    <span class="hero-stars-label"><strong>5.0</strong> &nbsp;·&nbsp; 67 Google reviews</span>
+  </div>
+  <button class="hero-cta" onclick="startQuiz()">
+    Find My Package
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <p class="hero-trust">Takes 60 seconds &nbsp;·&nbsp; No personal information required</p>
+</div>
+
+<!-- Mobile fixed bottom CTA -->
+<div class="hero-cta-fixed" id="heroCtaFixed">
+  <button class="hero-cta" onclick="startQuiz()">
+    Find My Package
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <p class="hero-trust">Takes 60 seconds &nbsp;·&nbsp; No personal information required</p>
+</div>
+
+<div class="progress-shell" id="progressShell" style="display:none">
+  <div class="progress-row">
+    <span class="progress-step-label" id="stepLabel">Step 1 of 4</span>
+    <span class="progress-pct" id="stepPct">25%</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<main id="mainContent"></main>
+
+<div class="bottom-nav" id="bottomNav" style="display:none">
+  <button class="btn-back" id="btnBack" onclick="goBack()">&#8592; Back</button>
+  <button class="btn-next" id="btnNext" onclick="goNext()">Continue &#8594;</button>
+</div>
+
+<script>
+const DEBUG = window.location.search.includes('debug=1');
+
+// ── UPDATE THESE URLS ─────────────────────────────────────────────────────────
+const RESULTS_URL = 'https://twowildsoulsphotography.com/senior-portrait-results';
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Package definitions based on quiz answers
+const PACKAGES = {
+  heirloom: {
+    name: 'The Heirloom Experience',
+    tagline: 'Album · Wall Art · Full Story · Fully Guided',
+    emoji: '✨',
+    description: 'A completely done-for-you experience — curated album design, framed wall portraits, and gift prints, handled start to finish.'
+  },
+  digital: {
+    name: 'The Digital Collection',
+    tagline: 'Digital Images · Announcements · Social-Ready',
+    emoji: '🎓',
+    description: 'Beautiful, polished images delivered digitally — perfect for announcements, social media, and sharing with family far and wide.'
+  },
+  concierge: {
+    name: 'The White Glove Concierge',
+    tagline: 'All Products · Full Planning · Completely Handled',
+    emoji: '🤍',
+    description: 'Every detail managed by us — from style planning to final delivery. You show up; we handle everything else.'
+  },
+  essentials: {
+    name: 'The Essentials Session',
+    tagline: 'Key Portraits · Meaningful & Streamlined',
+    emoji: '🌿',
+    description: 'A focused, meaningful session that delivers a handful of beautifully crafted portraits without the overwhelm.'
+  }
+};
+
+const STEPS = [
+  {
+    id: 'gradYear',
+    type: 'options',
+    question: 'When will your senior graduate?',
+    hint: "This helps us understand your timeline and booking urgency.",
+    options: [
+      { value: 'spring2026', label: 'Spring 2026', sub: 'Senior year is already here — let\'s make it count' },
+      { value: 'spring2027', label: 'Spring 2027', sub: 'Plenty of time to plan the perfect session' },
+      { value: 'spring2028', label: 'Spring 2028 or later', sub: 'Junior year and beyond — great time to start thinking ahead' }
+    ]
+  },
+  {
+    id: 'products',
+    type: 'options',
+    question: 'What would you love to walk away with?',
+    hint: "We'll match you to the package that delivers exactly this.",
+    options: [
+      { value: 'album',   label: 'A professionally designed heirloom album', sub: 'Something they\'ll take with them into adulthood' },
+      { value: 'wall',    label: 'Custom-framed wall portraits', sub: 'Make your home feel even more meaningful' },
+      { value: 'gifts',   label: 'Gift prints and folio boxes', sub: 'For family, grandparents, and loved ones' },
+      { value: 'digital', label: 'Digital images for announcements or social media', sub: 'Shareable, printable, and announcement-ready' },
+      { value: 'guided',  label: 'I\'m not sure yet — looking for full-service guidance', sub: 'We\'ll walk you through every option' }
+    ]
+  },
+  {
+    id: 'priority',
+    type: 'options',
+    question: "What's most important to you in a senior photographer?",
+    hint: "Be honest — this is the most important question we'll ask.",
+    options: [
+      { value: 'stressfree',  label: 'A seamless, stress-free experience handled by a professional', sub: null },
+      { value: 'highend',     label: 'Someone who creates high-end, personalized sessions', sub: null },
+      { value: 'heirloom',    label: 'Expertise in designing and delivering heirloom-quality products', sub: null },
+      { value: 'simple',      label: 'A simple, straightforward option with a few meaningful images', sub: null }
+    ]
+  },
+  {
+    id: 'planning',
+    type: 'options',
+    question: 'Be honest — how much planning time do you really have?',
+    hint: "There's no wrong answer. We have a great experience at every level.",
+    options: [
+      { value: 'none',       label: 'Not much — I\'d love for someone to handle every detail', sub: 'Full-service, done-for-you is my dream' },
+      { value: 'some',       label: 'I can give input, but prefer a streamlined done-for-you experience', sub: null },
+      { value: 'handson',    label: 'I enjoy being hands-on and prefer to manage details myself', sub: null }
+    ]
+  }
+];
+
+const state = { gradYear: null, products: null, priority: null, planning: null };
+let currentStep = -1;
+const TOTAL = STEPS.length;
+
+function encodeQuizData(data) { return btoa(unescape(encodeURIComponent(JSON.stringify(data)))); }
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+function getGradLabel(val) {
+  if (val === 'spring2026') return 'Spring 2026';
+  if (val === 'spring2027') return 'Spring 2027';
+  return 'Spring 2028+';
+}
+
+function getPriorityLabel(val) {
+  if (val === 'stressfree') return 'Stress-free experience';
+  if (val === 'highend')    return 'High-end & personalized';
+  if (val === 'heirloom')   return 'Heirloom-quality products';
+  return 'Simple & meaningful';
+}
+
+function getProductLabel(val) {
+  const map = { album: 'Heirloom Album', wall: 'Wall Portraits', gifts: 'Gift Prints', digital: 'Digital Images', guided: 'Full-Service Guidance' };
+  return map[val] || val;
+}
+
+function getPlanningLabel(val) {
+  if (val === 'none')    return 'Full done-for-you';
+  if (val === 'some')    return 'Guided with input';
+  return 'Hands-on';
+}
+
+function calculate() {
+  const { products, priority, planning, gradYear } = state;
+
+  // Package recommendation logic
+  // Heirloom: wants album or wall art, values heirloom quality
+  // Digital: wants digital images, simple priority
+  // Concierge: wants full-service guidance, no planning time
+  // Essentials: simple option, hands-on, straightforward priority
+
+  let pkgKey = 'heirloom'; // default
+
+  if (planning === 'none' || products === 'guided' || priority === 'stressfree') {
+    pkgKey = 'concierge';
+  } else if (products === 'digital' && (priority === 'simple' || planning === 'handson')) {
+    pkgKey = 'digital';
+  } else if (priority === 'simple' && planning === 'handson') {
+    pkgKey = 'essentials';
+  } else if (products === 'album' || products === 'wall' || priority === 'heirloom') {
+    pkgKey = 'heirloom';
+  } else if (products === 'gifts') {
+    pkgKey = 'heirloom';
+  }
+
+  const quizData = {
+    package:   pkgKey,
+    gradYear,
+    products,
+    priority,
+    planning
+  };
+
+  const incomingParams = new URLSearchParams(window.location.search);
+  const fbclid = incomingParams.get('fbclid');
+  const gclid  = incomingParams.get('gclid');
+  const finalParams = new URLSearchParams({ d: encodeQuizData(quizData) });
+  if (fbclid) finalParams.append('fbclid', fbclid);
+  if (gclid)  finalParams.append('gclid',  gclid);
+
+  return { pkgKey, quizData, finalParams };
+}
+
+function render() {
+  const content  = document.getElementById('mainContent');
+  const shell    = document.getElementById('progressShell');
+  const nav      = document.getElementById('bottomNav');
+  const fill     = document.getElementById('progressFill');
+  const stepLbl  = document.getElementById('stepLabel');
+  const pctLbl   = document.getElementById('stepPct');
+  const btnBack  = document.getElementById('btnBack');
+  const btnNext  = document.getElementById('btnNext');
+  const dotsEl   = document.getElementById('dots');
+
+  // ── INTRO ──
+  if (currentStep === -1) {
+    document.getElementById('introHero').classList.add('visible');
+    document.getElementById('heroCtaFixed').classList.add('visible');
+    content.innerHTML = '';
+    shell.style.display = 'none'; nav.style.display = 'none';
+    return;
+  }
+
+  document.getElementById('introHero').classList.remove('visible');
+  document.getElementById('heroCtaFixed').classList.remove('visible');
+
+  // ── RESULTS ──
+  if (currentStep >= TOTAL) {
+    shell.style.display = 'block'; nav.style.display = 'none';
+    fill.style.width = '100%';
+    stepLbl.textContent = 'Building your recommendation';
+    pctLbl.textContent = '✓';
+    dotsEl.innerHTML = '';
+
+    const { pkgKey, quizData, finalParams } = calculate();
+    const pkg      = PACKAGES[pkgKey];
+    const finalURL = RESULTS_URL + '?' + finalParams.toString();
+
+    content.innerHTML = `
+      <div class="redirect-screen">
+        <div class="redirect-spinner"></div>
+        <p class="redirect-package">${pkg.emoji} ${pkg.name}</p>
+        <p class="redirect-tagline">${pkg.tagline}</p>
+        <p class="redirect-phrase" id="tws-rotating-phrase">Personalizing your recommendation…</p>
+        <div class="redirect-summary">
+          <div class="summary-row"><span class="summary-label">Graduation</span><span class="summary-value">${getGradLabel(quizData.gradYear)}</span></div>
+          <div class="summary-row"><span class="summary-label">Goal</span><span class="summary-value">${getProductLabel(quizData.products)}</span></div>
+          <div class="summary-row"><span class="summary-label">Priority</span><span class="summary-value">${getPriorityLabel(quizData.priority)}</span></div>
+          <div class="summary-row"><span class="summary-label">Planning style</span><span class="summary-value gold">${getPlanningLabel(quizData.planning)}</span></div>
+        </div>
+      </div>`;
+
+    const PHRASES = [
+      'Personalizing your recommendation…',
+      'Matching you to the right experience…',
+      'Building your custom overview…',
+      'Checking package details…',
+      'Almost ready…'
+    ];
+
+    const el = document.getElementById('tws-rotating-phrase');
+    if (el) {
+      let idx = 0;
+      setInterval(function() {
+        idx = (idx + 1) % PHRASES.length;
+        el.style.opacity = '0';
+        setTimeout(function() { el.textContent = PHRASES[idx]; el.style.opacity = '1'; }, 200);
+      }, 1500);
+    }
+
+    if (DEBUG) {
+      const debugBox = document.createElement('div');
+      debugBox.style.cssText = 'margin:20px auto;max-width:360px;background:white;border:2px solid #C7B27A;border-radius:8px;padding:20px;text-align:left;font-size:12px;word-break:break-all;';
+      debugBox.innerHTML = '<p style="font-weight:600;margin-bottom:8px;color:#2E2F2C">🔍 DEBUG: Redirect URL</p>'
+        + '<p style="color:#6B6E6A;margin-bottom:12px">Auto-redirect is paused. Tap to test:</p>'
+        + '<a href="' + finalURL + '" style="color:#7C8A5A;text-decoration:underline;line-height:1.6">' + finalURL + '</a>'
+        + '<p style="margin-top:12px;color:#6B6E6A">Decoded data:<br><span style="color:#2E2F2C">' + JSON.stringify(quizData, null, 2).replace(/\n/g,'<br>').replace(/ /g,'&nbsp;') + '</span></p>';
+      document.querySelector('.redirect-screen').appendChild(debugBox);
+    } else {
+      setTimeout(function() { window.location.href = finalURL; }, 2200);
+    }
+    return;
+  }
+
+  // ── QUIZ STEP ──
+  const step = STEPS[currentStep];
+  const pct  = Math.round(((currentStep + 1) / TOTAL) * 100);
+  shell.style.display = 'block'; nav.style.display = 'flex';
+  fill.style.width = pct + '%';
+  stepLbl.textContent = 'Step ' + (currentStep + 1) + ' of ' + TOTAL;
+  pctLbl.textContent  = pct + '%';
+  btnBack.style.display = currentStep === 0 ? 'none' : '';
+  btnNext.disabled = !state[step.id];
+  btnNext.textContent = currentStep === TOTAL - 1 ? 'See My Results →' : 'Continue →';
+
+  dotsEl.innerHTML = '';
+  for (let i = 0; i < TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === currentStep ? ' active' : i < currentStep ? ' done' : '');
+    dotsEl.appendChild(d);
+  }
+
+  content.innerHTML = `
+    <div class="question-wrap">
+      <h2 class="question-headline">${step.question}</h2>
+      ${step.hint ? '<p class="question-hint">' + step.hint + '</p>' : ''}
+      <div class="options-list">
+        ${step.options.map(function(o) {
+          const sel = state[step.id] === o.value ? 'selected' : '';
+          return '<button class="opt-btn ' + sel + '" onclick="selectOpt(\'' + step.id + '\',\'' + o.value + '\',this)">'
+            + '<span class="opt-check"></span>'
+            + '<span class="opt-text">'
+            + '<span class="opt-label">' + o.label + '</span>'
+            + (o.sub ? '<span class="opt-sub">' + o.sub + '</span>' : '')
+            + '</span></button>';
+        }).join('')}
+      </div>
+      <p class="val-msg" id="valMsg"></p>
+    </div>`;
+}
+
+function startQuiz() {
+  document.getElementById('heroCtaFixed').classList.remove('visible');
+  currentStep = 0; render(); scrollToTop();
+}
+
+function selectOpt(id, value, el) {
+  state[id] = value;
+  document.querySelectorAll('.opt-btn').forEach(function(b) { b.classList.remove('selected'); });
+  el.classList.add('selected');
+  document.getElementById('btnNext').disabled = false;
+  setTimeout(function() { goNext(); }, 280);
+}
+
+function goNext() {
+  const step = STEPS[currentStep];
+  const msg  = document.getElementById('valMsg');
+  if (step && !state[step.id]) {
+    if (msg) { msg.style.display = 'block'; msg.textContent = 'Please make a selection.'; }
+    return;
+  }
+  currentStep++; render(); scrollToTop();
+}
+
+function goBack() {
+  if (currentStep > 0) { currentStep--; render(); scrollToTop(); }
+  else { currentStep = -1; render(); }
+}
+
+const _startParams = new URLSearchParams(window.location.search);
+if (_startParams.get('start') === '1') { currentStep = 0; }
+render();
+</script>
+</body>
+</html>
