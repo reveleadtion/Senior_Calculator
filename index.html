@@ -194,19 +194,39 @@ main {
 #introHero {
   display: none;
   width: 100%;
-  min-height: calc(100svh - 57px);
+  height: calc(100svh - 57px);
   flex-shrink: 0;
   align-self: stretch;
   position: relative;
   overflow: hidden;
   background: #0d1a2e;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 48px 24px;
-  text-align: center;
 }
 #introHero.visible { display: flex; }
+
+.hero-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  z-index: 0;
+}
+.hero-sky-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(8,14,28,0.75) 0%,
+    rgba(8,14,28,0.55) 22%,
+    rgba(8,14,28,0.15) 44%,
+    rgba(0,0,0,0.00)   56%);
+  z-index: 1;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 24px 22px 0;
+  flex: 1;
+  display: flex; flex-direction: column;
+  justify-content: flex-start;
+}
 
 .hero-eyebrow { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(199,178,122,0.85); margin-bottom: 14px; }
 .hero-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 8vw, 52px); font-weight: 300; line-height: 1.08; color: white; margin-bottom: 14px; max-width: 500px; }
@@ -239,9 +259,52 @@ main {
 .hero-cta-fixed .hero-cta { width: 100%; justify-content: center; }
 .hero-cta-fixed .hero-trust { color: rgba(255,255,255,0.4); }
 
+@media (max-width: 767px) {
+  .hero-cta-inline   { display: none; }
+  .hero-trust-inline { display: none; }
+  .hero-cta-fixed {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--bg); border-top: 1px solid var(--faint);
+    padding: 14px 20px max(14px, env(safe-area-inset-bottom));
+    z-index: 200; box-shadow: 0 -2px 10px rgba(0,0,0,0.06);
+  }
+  .hero-cta-fixed.visible { display: block; }
+  .hero-cta-fixed .hero-cta { box-shadow: none; margin-bottom: 8px; }
+  .hero-cta-fixed .hero-trust { color: var(--text2); text-shadow: none; font-size: 11px; text-align: center; }
+}
+
 @media (min-width: 768px) {
-  .hero-cta-fixed { display: none !important; }
-  #introHero { padding: 64px 40px; }
+  .hero-cta-fixed,
+  .hero-cta-fixed.visible { display: none !important; }
+
+  #introHero.visible {
+    flex-direction: row;
+    height: auto;
+    min-height: 0;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .hero-content {
+    width: 420px; min-width: 340px; max-width: 440px; flex: none;
+    justify-content: center; padding: 48px 44px;
+    background: rgba(10,16,28,0.92);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    border-right: 1px solid rgba(255,255,255,0.07);
+    position: relative; align-self: stretch;
+  }
+  .hero-sky-overlay { display: none; }
+  .hero-img {
+    position: relative; width: 360px; flex: none;
+    aspect-ratio: 4 / 5; object-fit: cover;
+    object-position: 56% 30%;
+  }
+  .hero-trust { color: rgba(255,255,255,0.55); text-shadow: none; }
+}
+
+@media (min-width: 1024px) {
+  .hero-content { width: 460px; max-width: 460px; padding: 52px 52px; }
+  .hero-img { width: 400px; }
+  .hero-headline { font-size: 46px; }
 }
 </style>
 </head>
@@ -256,30 +319,34 @@ main {
 </header>
 
 <div id="introHero">
-  <p class="hero-eyebrow">Personalized Senior Portrait Consultation</p>
-  <h1 class="hero-headline">Find your <em>perfect</em><br>senior session.</h1>
-  <p class="hero-body">Answer 4 quick questions and we'll match your senior to the right experience — products, planning level, and package that fits your family.</p>
-  <div class="hero-pills">
-    <span class="hero-pill">Heirloom Albums</span>
-    <span class="hero-pill">Framed Wall Portraits</span>
-    <span class="hero-pill">Fully Guided</span>
-    <span class="hero-pill">Full-Service Experience</span>
-  </div>
-  <div class="hero-stars">
-    <div class="hero-stars-icons">
-      <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
-      <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
-      <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
-      <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
-      <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+  <img class="hero-img" src="hero.jpeg" alt="Senior portrait by Two Wild Souls Photography">
+  <div class="hero-sky-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Personalized Senior Portrait Consultation</p>
+    <h1 class="hero-headline">Find your <em>perfect</em><br>senior session.</h1>
+    <p class="hero-body">Answer 4 quick questions and we'll match your senior to the right experience — products, planning level, and package that fits your family.</p>
+    <div class="hero-pills">
+      <span class="hero-pill">Heirloom Albums</span>
+      <span class="hero-pill">Framed Wall Portraits</span>
+      <span class="hero-pill">Fully Guided</span>
+      <span class="hero-pill">Full-Service Experience</span>
     </div>
-    <span class="hero-stars-label"><strong>5.0</strong> &nbsp;·&nbsp; 67 Google reviews</span>
+    <div class="hero-stars">
+      <div class="hero-stars-icons">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+      </div>
+      <span class="hero-stars-label"><strong>5.0</strong> &nbsp;·&nbsp; 67 Google reviews</span>
+    </div>
+    <button class="hero-cta hero-cta-inline" onclick="startQuiz()">
+      Find My Package
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <p class="hero-trust hero-trust-inline">Takes 60 seconds &nbsp;·&nbsp; No personal information required</p>
   </div>
-  <button class="hero-cta" onclick="startQuiz()">
-    Find My Package
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
-  <p class="hero-trust">Takes 60 seconds &nbsp;·&nbsp; No personal information required</p>
 </div>
 
 <!-- Mobile fixed bottom CTA -->
