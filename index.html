@@ -232,9 +232,9 @@ main {
 .hero-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 8vw, 52px); font-weight: 300; line-height: 1.08; color: white; margin-bottom: 14px; max-width: 500px; }
 .hero-headline em { font-style: italic; color: var(--gold); }
 .hero-body { font-size: 14px; line-height: 1.65; color: rgba(255,255,255,0.65); margin-bottom: 24px; max-width: 380px; }
-.hero-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 28px; }
-.hero-pill { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 100px; }
-.hero-stars { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; justify-content: center; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: left; margin-bottom: 28px; }
+.hero-pill { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 100px; }
+.hero-stars { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; justify-content: left; }
 .hero-stars-icons { display: flex; gap: 2px; }
 .hero-stars-label { font-size: 12px; color: rgba(255,255,255,0.55); }
 .hero-stars-label strong { color: white; }
@@ -323,23 +323,17 @@ main {
   <div class="hero-sky-overlay"></div>
   <div class="hero-content">
     <p class="hero-eyebrow">Fall Sessions Are Filling Now</p>
+    <div class="hero-stars" style="margin-bottom:10px">
+      <div class="hero-stars-icons"><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg></div>
+      <span class="hero-stars-label"><strong>5.0</strong> &nbsp;·&nbsp; 67 Google reviews</span>
+    </div>
     <h1 class="hero-headline">Don't settle for an <em>ordinary</em> senior experience<br></h1>
     <p class="hero-body">Answer 4 quick questions and we'll match your senior to the right experience — products, planning level, and experience that fits your family.</p>
     <div class="hero-pills">
       <span class="hero-pill">Pro Hair & Makeup Included</span>
-      <span class="hero-pill">Heirloom Albums & Wall Art</span>
+      <span class="hero-pill">Heirloom Artwork</span>
       <span class="hero-pill">Full-Service Experience</span>
       <span class="hero-pill">Love It or Pay Nothing</span>
-    </div>
-    <div class="hero-stars">
-      <div class="hero-stars-icons">
-        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
-        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
-        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
-        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
-        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
-      </div>
-      <span class="hero-stars-label"><strong>5.0</strong> &nbsp;·&nbsp; 67 Google reviews</span>
     </div>
     <button class="hero-cta hero-cta-inline" onclick="startQuiz()">
       Find My Experience
