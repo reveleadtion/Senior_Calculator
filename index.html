@@ -328,14 +328,14 @@ main {
     <span class="logo-name">Two Wild <em>Souls</em> Photography</span>
     <span class="logo-sub">Metro Detroit Senior Portraits</span>
   </div>
-  <span class="header-badge">2026 Spots Filling Now</span>
+  <span class="header-badge">Fall Spots Filling Now</span>
 </header>
 
 <div id="introHero">
   <img class="hero-img" src="hero.jpeg" alt="Senior portrait by Two Wild Souls Photography">
   <div class="hero-sky-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">2026 Sessions — Limited Spots</p>
+    <p class="hero-eyebrow">Fall 2025 Sessions — Limited Spots</p>
     <div class="hero-stars" style="margin-bottom:10px">
       <div class="hero-stars-icons"><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg></div>
       <span class="hero-stars-label"><strong>5.0</strong> &nbsp;·&nbsp; 67 Google reviews</span>
@@ -350,7 +350,7 @@ main {
     </div>
     <!-- Desktop: inline CTA inside hero-content panel -->
     <button class="hero-cta hero-cta-inline" onclick="startQuiz()">
-      Find Your Experience
+      Find Their Experience
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <p class="hero-trust hero-trust-inline">Takes 20 seconds &nbsp;·&nbsp; No personal info required</p>
@@ -360,7 +360,7 @@ main {
 <!-- Mobile fixed bottom CTA -->
 <div class="hero-cta-fixed" id="heroCtaFixed">
   <button class="hero-cta" onclick="startQuiz()">
-    Find Your Experience
+    Find Their Experience
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
   <p class="hero-trust">Takes 20 seconds &nbsp;·&nbsp; No personal information required</p>
@@ -426,7 +426,7 @@ const STEPS = [
     question: 'When will your senior graduate?',
     hint: "This helps us understand your timeline — and how much runway we have to make this exactly right.",
     options: [
-      { value: 'spring2026', label: 'Spring 2026', sub: 'Senior year is here — spots are filling fast' },
+      { value: 'spring2026', label: 'Spring 2026', sub: 'Senior year is here — fall spots are filling fast' },
       { value: 'spring2027', label: 'Spring 2027', sub: 'Plenty of time to plan the perfect session' },
       { value: 'spring2028', label: 'Spring 2028 or later', sub: 'Junior year and beyond — great time to start thinking ahead' }
     ]
@@ -573,16 +573,6 @@ function render() {
     dotsEl.innerHTML = '';
 
     const { pkgKey, quizData, finalParams } = calculate();
-
-    // ── META PIXEL: Quiz Completion ──
-    if (typeof fbq === 'function') {
-      fbq('track', 'Lead', {
-        content_name: 'Calculator Complete',
-        content_category: 'Senior Quiz',
-        value: 0.00,
-        currency: 'USD'
-      });
-    }
     const pkg      = PACKAGES[pkgKey];
     const finalURL = RESULTS_URL + '?' + finalParams.toString();
 
@@ -618,13 +608,27 @@ function render() {
       }, 1500);
     }
 
+    // ── FACEBOOK PIXEL: QUIZ COMPLETION ──
+    fbq('track', 'Lead', {
+      content_name: 'Calculator Complete',
+      content_type: 'quiz',
+      value: 0,
+      currency: 'USD'
+    });
+    // Also track as Custom Event for granular ad targeting
+    fbq('trackCustom', 'SeniorQuizComplete', {
+      package: pkg.name,
+      grad_year: quizData.gradYear
+    });
+
     if (DEBUG) {
       const debugBox = document.createElement('div');
       debugBox.style.cssText = 'margin:20px auto;max-width:360px;background:white;border:2px solid #C7B27A;border-radius:8px;padding:20px;text-align:left;font-size:12px;word-break:break-all;';
       debugBox.innerHTML = '<p style="font-weight:600;margin-bottom:8px;color:#2E2F2C">🔍 DEBUG: Redirect URL</p>'
         + '<p style="color:#6B6E6A;margin-bottom:12px">Auto-redirect is paused. Tap to test:</p>'
         + '<a href="' + finalURL + '" style="color:#7C8A5A;text-decoration:underline;line-height:1.6">' + finalURL + '</a>'
-        + '<p style="margin-top:12px;color:#6B6E6A">Decoded data:<br><span style="color:#2E2F2C">' + JSON.stringify(quizData, null, 2).replace(/\n/g,'<br>').replace(/ /g,'&nbsp;') + '</span></p>';
+        + '<p style="margin-top:12px;color:#6B6E6A">Decoded data:<br><span style="color:#2E2F2C">' + JSON.stringify(quizData, null, 2).replace(/\n/g,'<br>').replace(/ /g,'&nbsp;') + '</span></p>'
+        + '<p style="margin-top:12px;color:#7C8A5A;font-weight:600">✓ Pixel events fired:<br><span style="color:#2E2F2C">Lead + SeniorQuizComplete</span></p>';
       document.querySelector('.redirect-screen').appendChild(debugBox);
     } else {
       setTimeout(function() { window.location.href = finalURL; }, 2200);
@@ -671,15 +675,6 @@ function render() {
 
 function startQuiz() {
   document.getElementById('heroCtaFixed').classList.remove('visible');
-
-  // ── META PIXEL: Quiz Start ──
-  if (typeof fbq === 'function') {
-    fbq('track', 'ViewContent', {
-      content_name: 'Senior Quiz Started',
-      content_category: 'Senior Quiz'
-    });
-  }
-
   currentStep = 0; render(); scrollToTop();
 }
 
