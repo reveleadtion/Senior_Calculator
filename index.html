@@ -573,6 +573,16 @@ function render() {
     dotsEl.innerHTML = '';
 
     const { pkgKey, quizData, finalParams } = calculate();
+
+    // ── META PIXEL: Quiz Completion ──
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', {
+        content_name: 'Calculator Complete',
+        content_category: 'Senior Quiz',
+        value: 0.00,
+        currency: 'USD'
+      });
+    }
     const pkg      = PACKAGES[pkgKey];
     const finalURL = RESULTS_URL + '?' + finalParams.toString();
 
@@ -661,6 +671,15 @@ function render() {
 
 function startQuiz() {
   document.getElementById('heroCtaFixed').classList.remove('visible');
+
+  // ── META PIXEL: Quiz Start ──
+  if (typeof fbq === 'function') {
+    fbq('track', 'ViewContent', {
+      content_name: 'Senior Quiz Started',
+      content_category: 'Senior Quiz'
+    });
+  }
+
   currentStep = 0; render(); scrollToTop();
 }
 
