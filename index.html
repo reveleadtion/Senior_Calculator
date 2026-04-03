@@ -3,7 +3,6 @@
 <head>
 <!-- Meta Pixel Code -->
 <script>
-// ── PIXEL INITIALIZATION ──
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
@@ -11,13 +10,15 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
 (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1484618222285119',{});
 fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1484618222285119&ev=PageView&noscript=1"></noscript>
 <!-- End Meta Pixel Code -->
-  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="theme-color" content="#F7F5F2">
 <meta name="description" content="Senior year happens once. Find out which Two Wild Souls experience fits your family in 20 seconds — heirloom albums, wall portraits, full-service planning. Metro Detroit.">
-<title>Senior Photos Near You | Metro Detriot | Two Wild Souls Photography</title>
+<title>Senior Year Only Happens Once — Get the Photos to Prove It | Two Wild Souls Photography</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,41 +105,9 @@ main {
 .reviews-meta { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text2); }
 .reviews-score { font-weight: 500; color: var(--text); font-size: 14px; }
 .reviews-divider { color: var(--faint); }
-.pixel-debug-panel {
-  position: fixed;
-  bottom: 200px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.95);
-  color: #0F0;
-  font-family: 'Courier New', monospace;
-  font-size: 11px;
-  padding: 12px;
-  border-radius: 4px;
-  max-width: 320px;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 9999;
-  border: 1px solid #0F0;
-  line-height: 1.4;
-  display: none;
-}
-.pixel-debug-panel.visible { display: block; }
-.pixel-debug-panel strong { color: #0F0; }
-.pixel-debug-panel .error { color: #F00; }
-.pixel-debug-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #0F0;
-  color: #000;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 12px;
-  z-index: 9998;
-}
+.reviews-count { font-size: 12px; }
+
+.intro-cta {
   width: 100%; background: var(--cta); color: var(--bg); border: none;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; font-weight: 500; font-size: 14px;
   letter-spacing: 0.1em; text-transform: uppercase; padding: 18px; cursor: pointer;
@@ -168,42 +137,6 @@ main {
 .opt-sub { display: block; font-size: 12px; color: var(--text2); margin-top: 3px; }
 
 .val-msg { font-size: 12px; color: var(--error); padding: 0 0 8px; display: none; }
-
-.pixel-debug-panel {
-  position: fixed;
-  bottom: 200px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.95);
-  color: #0F0;
-  font-family: 'Courier New', monospace;
-  font-size: 11px;
-  padding: 12px;
-  border-radius: 4px;
-  max-width: 320px;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 9999;
-  border: 1px solid #0F0;
-  line-height: 1.4;
-  display: none;
-}
-.pixel-debug-panel.visible { display: block; }
-.pixel-debug-panel strong { color: #0F0; }
-.pixel-debug-panel .error { color: #F00; }
-.pixel-debug-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #0F0;
-  color: #000;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 12px;
-  z-index: 9998;
-}
 
 .bottom-nav {
   position: fixed;
@@ -395,14 +328,14 @@ main {
     <span class="logo-name">Two Wild <em>Souls</em> Photography</span>
     <span class="logo-sub">Metro Detroit Senior Portraits</span>
   </div>
-  <span class="header-badge">Spots Filling Now</span>
+  <span class="header-badge">Fall Spots Filling Now</span>
 </header>
 
 <div id="introHero">
   <img class="hero-img" src="hero.jpeg" alt="Senior portrait by Two Wild Souls Photography">
   <div class="hero-sky-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">2026 Senior Sessions — Limited Spots</p>
+    <p class="hero-eyebrow">Fall 2025 Sessions — Limited Spots</p>
     <div class="hero-stars" style="margin-bottom:10px">
       <div class="hero-stars-icons"><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg></div>
       <span class="hero-stars-label"><strong>5.0</strong> &nbsp;·&nbsp; 67 Google reviews</span>
@@ -493,7 +426,7 @@ const STEPS = [
     question: 'When will your senior graduate?',
     hint: "This helps us understand your timeline — and how much runway we have to make this exactly right.",
     options: [
-      { value: 'spring2026', label: 'Spring 2026', sub: 'Senior year is here — spots are filling fast' },
+      { value: 'spring2026', label: 'Spring 2026', sub: 'Senior year is here — fall spots are filling fast' },
       { value: 'spring2027', label: 'Spring 2027', sub: 'Plenty of time to plan the perfect session' },
       { value: 'spring2028', label: 'Spring 2028 or later', sub: 'Junior year and beyond — great time to start thinking ahead' }
     ]
@@ -676,22 +609,17 @@ function render() {
     }
 
     // ── FACEBOOK PIXEL: QUIZ COMPLETION ──
-    window._pixelDebug.addLog('Quiz complete! Firing pixel events...');
-    
     fbq('track', 'Lead', {
       content_name: 'Calculator Complete',
       content_type: 'quiz',
       value: 0,
       currency: 'USD'
     });
-    window._pixelDebug.addLog('✓ Lead event fired');
-    
     // Also track as Custom Event for granular ad targeting
     fbq('trackCustom', 'SeniorQuizComplete', {
       package: pkg.name,
       grad_year: quizData.gradYear
     });
-    window._pixelDebug.addLog('✓ SeniorQuizComplete custom event fired');
 
     if (DEBUG) {
       const debugBox = document.createElement('div');
@@ -776,7 +704,6 @@ function goBack() {
 const _startParams = new URLSearchParams(window.location.search);
 if (_startParams.get('start') === '1') { currentStep = 0; }
 render();
-
 </script>
 </body>
 </html>
