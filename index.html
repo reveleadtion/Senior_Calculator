@@ -3,47 +3,16 @@
 <head>
 <!-- Meta Pixel Code -->
 <script>
-// ── PIXEL INITIALIZATION WITH DEBUG LOGGING ──
-window._pixelDebug = {
-  logs: [],
-  addLog: function(msg) {
-    const ts = new Date().toISOString().split('T')[1].split('.')[0];
-    this.logs.push('[' + ts + '] ' + msg);
-    console.log('🔵 PIXEL DEBUG:', msg);
-  }
-};
-
-window._pixelDebug.addLog('Starting Pixel initialization...');
-
+// ── PIXEL INITIALIZATION ──
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
 (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-// Detect if script loaded
-window._pixelDebug.addLog('Script tag injected, waiting for fbq...');
-
-// Give fbq time to load, then check
-setTimeout(function() {
-  if (typeof fbq !== 'undefined' && window.fbq) {
-    window._pixelDebug.addLog('✓ fbq loaded successfully');
-    window._pixelDebug.fbqAvailable = true;
-  } else {
-    window._pixelDebug.addLog('✗ fbq NOT available - likely blocked by ad blocker or CSP');
-    window._pixelDebug.fbqAvailable = false;
-  }
-}, 500);
-
 fbq('init','1484618222285119',{});
-window._pixelDebug.addLog('Init called for Pixel ID 1484618222285119');
-
 fbq('track','PageView');
-window._pixelDebug.addLog('PageView event tracked');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1484618222285119&ev=PageView&noscript=1"></noscript>
 <!-- End Meta Pixel Code -->
+  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="theme-color" content="#F7F5F2">
@@ -420,9 +389,6 @@ main {
 </style>
 </head>
 <body>
-
-<div class="pixel-debug-panel" id="pixelDebugPanel"></div>
-<button class="pixel-debug-toggle" id="pixelDebugToggle">🔍 Pixel Debug</button>
 
 <header>
   <div class="logo-wrap">
@@ -811,28 +777,6 @@ const _startParams = new URLSearchParams(window.location.search);
 if (_startParams.get('start') === '1') { currentStep = 0; }
 render();
 
-// ── PIXEL DEBUG PANEL ──
-document.getElementById('pixelDebugToggle').addEventListener('click', function() {
-  document.getElementById('pixelDebugPanel').classList.toggle('visible');
-});
-
-function updateDebugPanel() {
-  const panel = document.getElementById('pixelDebugPanel');
-  const status = window._pixelDebug.fbqAvailable 
-    ? '<strong style="color: #0F0">✓ Pixel Active</strong>' 
-    : '<strong style="color: #F00">✗ Pixel Blocked</strong>';
-  
-  const logHTML = window._pixelDebug.logs
-    .slice(-15)
-    .map(function(log) { return log; })
-    .join('<br>');
-  
-  panel.innerHTML = status + '<br><br>' + logHTML;
-}
-
-// Update debug panel every 500ms
-setInterval(updateDebugPanel, 500);
-updateDebugPanel();
 </script>
 </body>
 </html>
