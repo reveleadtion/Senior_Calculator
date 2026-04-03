@@ -18,7 +18,7 @@ fbq('track','PageView');
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="theme-color" content="#F7F5F2">
 <meta name="description" content="Senior year happens once. Find out which Two Wild Souls experience fits your family in 20 seconds — heirloom albums, wall portraits, full-service planning. Metro Detroit.">
-<title>Senior Year Only Happens Once — Get the Photos to Prove It | Two Wild Souls Photography</title>
+<title>Senior Photos Near You | Metro Detriot | Two Wild Souls Photography</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,7 +105,6 @@ main {
 .reviews-meta { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text2); }
 .reviews-score { font-weight: 500; color: var(--text); font-size: 14px; }
 .reviews-divider { color: var(--faint); }
-.reviews-count { font-size: 12px; }
 
 .intro-cta {
   width: 100%; background: var(--cta); color: var(--bg); border: none;
@@ -328,14 +327,14 @@ main {
     <span class="logo-name">Two Wild <em>Souls</em> Photography</span>
     <span class="logo-sub">Metro Detroit Senior Portraits</span>
   </div>
-  <span class="header-badge">Fall Spots Filling Now</span>
+  <span class="header-badge">Spots Filling Now</span>
 </header>
 
 <div id="introHero">
   <img class="hero-img" src="hero.jpeg" alt="Senior portrait by Two Wild Souls Photography">
   <div class="hero-sky-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Fall 2025 Sessions — Limited Spots</p>
+    <p class="hero-eyebrow">2026 Senior Sessions — Limited Spots</p>
     <div class="hero-stars" style="margin-bottom:10px">
       <div class="hero-stars-icons"><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg></div>
       <span class="hero-stars-label"><strong>5.0</strong> &nbsp;·&nbsp; 67 Google reviews</span>
@@ -391,7 +390,6 @@ const DEBUG = window.location.search.includes('debug=1');
 const RESULTS_URL = 'https://twowildsoulsphotography.com/personalized-senior-results';
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Package definitions based on quiz answers
 const PACKAGES = {
   heirloom: {
     name: 'Model For a Day Experience',
@@ -426,7 +424,7 @@ const STEPS = [
     question: 'When will your senior graduate?',
     hint: "This helps us understand your timeline — and how much runway we have to make this exactly right.",
     options: [
-      { value: 'spring2026', label: 'Spring 2026', sub: 'Senior year is here — fall spots are filling fast' },
+      { value: 'spring2026', label: 'Spring 2026', sub: 'Senior year is here — spots are filling fast' },
       { value: 'spring2027', label: 'Spring 2027', sub: 'Plenty of time to plan the perfect session' },
       { value: 'spring2028', label: 'Spring 2028 or later', sub: 'Junior year and beyond — great time to start thinking ahead' }
     ]
@@ -502,12 +500,6 @@ function getPlanningLabel(val) {
 
 function calculate() {
   const { products, priority, planning, gradYear } = state;
-
-  // Package recommendation logic
-  // Heirloom: wants album or wall art, values heirloom quality
-  // Digital: wants digital images, simple priority
-  // Concierge: wants full-service guidance, no planning time
-  // Essentials: simple option, hands-on, straightforward priority
 
   let pkgKey = 'heirloom'; // default
 
@@ -609,17 +601,18 @@ function render() {
     }
 
     // ── FACEBOOK PIXEL: QUIZ COMPLETION ──
-    fbq('track', 'Lead', {
-      content_name: 'Calculator Complete',
-      content_type: 'quiz',
-      value: 0,
-      currency: 'USD'
-    });
-    // Also track as Custom Event for granular ad targeting
-    fbq('trackCustom', 'SeniorQuizComplete', {
-      package: pkg.name,
-      grad_year: quizData.gradYear
-    });
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', {
+        content_name: 'Calculator Complete',
+        content_type: 'quiz',
+        value: 0,
+        currency: 'USD'
+      });
+      fbq('trackCustom', 'SeniorQuizComplete', {
+        package: pkg.name,
+        grad_year: quizData.gradYear
+      });
+    }
 
     if (DEBUG) {
       const debugBox = document.createElement('div');
