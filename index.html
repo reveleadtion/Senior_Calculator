@@ -14,6 +14,7 @@ fbq('track','PageView');
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1484618222285119&ev=PageView&noscript=1"></noscript>
 <!-- End Meta Pixel Code -->
+<link rel="canonical" href="https://twowildsoulsphotography.com/metro-detroit-senior-photography" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <meta name="theme-color" content="#F7F5F2">
@@ -63,10 +64,17 @@ header {
   padding: 18px 20px; border-bottom: 1px solid var(--faint);
   position: sticky; top: 0; background: var(--bg); z-index: 100;
 }
-.logo-wrap { display: flex; flex-direction: column; gap: 2px; }
+header .logo-wrap a {
+  text-decoration: none;
+  color: inherit;
+  display: contents; /* preserves your existing flex/block layout */
+}
 .logo-name { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 400; letter-spacing: 0.04em; color: var(--text); }
 .logo-name em { font-style: italic; color: var(--gold); }
 .logo-sub { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text2); }
+.logo-sub {
+  display: block;
+}
 .header-badge {
   font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
   background: rgba(124,138,90,0.1); border: 1px solid var(--border);
@@ -324,8 +332,10 @@ main {
 
 <header>
   <div class="logo-wrap">
-    <span class="logo-name">Two Wild <em>Souls</em> Photography</span>
-    <span class="logo-sub">Metro Detroit Senior Portraits</span>
+    <a href="https://twowildsoulsphotography.com/metro-detroit-senior-photography" rel="noopener" aria-label="Two Wild Souls Photography – Metro Detroit Senior Portraits">
+      <span class="logo-name">Two Wild <em>Souls</em> Photography</span>
+      <span class="logo-sub">Metro Detroit Senior Portraits</span>
+    </a>
   </div>
   <span class="header-badge">Only a Few Spots Left!</span>
 </header>
