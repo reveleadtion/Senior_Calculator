@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /?*
+Disallow: /_next/
+Disallow: /_vercel/
+
+# Allow search engines to crawl quiz parameters
+Allow: /?start=1
+Allow: /?step=*
+Allow: /?fbclid=*
+Allow: /?gclid=*
+
+# Reference sitemap for discovery
+Sitemap: https://www.detroitseniorpictures.com/sitemap.xml
+
+# Crawl delay (optional, be aggressive for Google)
+Crawl-delay: 1
