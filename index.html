@@ -460,6 +460,7 @@ const STEPS = [
     question: "What matters most to you in a senior photographer?",
     hint: "This is the most important question — your answer changes everything about how we plan your session.",
     options: [
+      { value: 'outdoor',     label: 'Outdoor or on-location photos', sub: 'Natural light, real settings — the full on-location experience' },
       { value: 'stressfree',  label: 'A seamless, stress-free experience handled by a professional', sub: null },
       { value: 'highend',     label: 'Someone who creates high-end, personalized sessions', sub: null },
       { value: 'heirloom',    label: 'Expertise in designing and delivering heirloom-quality products', sub: null },
@@ -493,6 +494,7 @@ function getGradLabel(val) {
 }
 
 function getPriorityLabel(val) {
+  if (val === 'outdoor')    return 'Outdoor / on-location';
   if (val === 'stressfree') return 'Stress-free experience';
   if (val === 'highend')    return 'High-end & personalized';
   if (val === 'heirloom')   return 'Heirloom-quality products';
@@ -515,7 +517,10 @@ function calculate() {
 
   let pkgKey = 'heirloom'; // default
 
-  if (planning === 'none' || products === 'guided' || priority === 'stressfree') {
+  // Outdoor photos always require Model For a Day
+  if (priority === 'outdoor') {
+    pkgKey = planning === 'none' || products === 'guided' ? 'concierge' : 'heirloom';
+  } else if (planning === 'none' || products === 'guided' || priority === 'stressfree') {
     pkgKey = 'concierge';
   } else if (products === 'digital' && (priority === 'simple' || planning === 'handson')) {
     pkgKey = 'digital';
