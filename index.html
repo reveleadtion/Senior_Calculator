@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -8,15 +9,15 @@ n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
 (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1484618222285119', {
-  em: 'email@email.com',   // Values will be hashed automatically by the pixel using SHA-256
-  ph: '1234567890',
-});
-fbq('track','PageView');
+
+fbq('init', '1484618222285119');
+fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=1484618222285119&ev=PageView&noscript=1"></noscript>
+  src="https://www.facebook.com/tr?id=1484618222285119&ev=PageView&noscript=1"/>
+</noscript>
 <!-- End Meta Pixel Code -->
+
 <link rel="canonical" href="https://twowildsoulsphotography.com/metro-detroit-senior-photography" />
 <link rel="icon" type="image/png" href="/favicon.png">
 <meta charset="UTF-8">
@@ -363,7 +364,7 @@ main {
       <span class="hero-pill">Love It or Pay Nothing</span>
     </div>
     <!-- Desktop: inline CTA inside hero-content panel -->
-    <button class="hero-cta hero-cta-inline" onclick="startQuiz()">
+    <button class="hero-cta hero-cta-inline" onclick="start()">
       Find Their Experience
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
@@ -373,7 +374,7 @@ main {
 
 <!-- Mobile fixed bottom CTA -->
 <div class="hero-cta-fixed" id="heroCtaFixed">
-  <button class="hero-cta" onclick="startQuiz()">
+  <button class="hero-cta" onclick="start()">
     Find Their Experience
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </button>
@@ -487,7 +488,7 @@ const state = { gradYear: null, products: null, priority: null, planning: null }
 let currentStep = -1;
 const TOTAL = STEPS.length;
 
-function encodeQuizData(data) { return btoa(unescape(encodeURIComponent(JSON.stringify(data)))); }
+function encodeData(data) { return btoa(unescape(encodeURIComponent(JSON.stringify(data)))); }
 function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
 function getGradLabel(val) {
@@ -535,7 +536,7 @@ function calculate() {
     pkgKey = 'heirloom';
   }
 
-  const quizData = {
+  const Data = {
     package:   pkgKey,
     gradYear,
     products,
@@ -620,19 +621,30 @@ function render() {
       }, 1500);
     }
 
-    // ── FACEBOOK PIXEL: QUIZ COMPLETION ──
-    if (typeof fbq === 'function') {
-      fbq('track', 'Lead', {
-        content_name: 'Calculator Complete',
-        content_type: 'quiz',
-        value: 0,
-        currency: 'USD'
-      });
-      fbq('trackCustom', 'SeniorQuizComplete', {
-        package: pkg.name,
-        grad_year: quizData.gradYear
-      });
-    }
+// ── FACEBOOK PIXEL: QUIZ COMPLETION ──
+if (typeof fbq === 'function') {
+
+  // Re-init with matched user data collected during quiz
+  fbq('init', '1484618222285119', {
+    em: (quizData.email || '').toLowerCase().trim(),
+    ph: (quizData.phone || '').replace(/\D/g, ''),
+    fn: (quizData.firstName || '').toLowerCase().trim(),
+    ln: (quizData.lastName || '').toLowerCase().trim(),
+  });
+
+  fbq('track', 'Lead', {
+    content_name: 'Calculator Complete',
+    content_type: 'quiz',
+    value: 0,
+    currency: 'USD'
+  });
+
+  fbq('trackCustom', 'SeniorQuizComplete', {
+    package: pkg.name,
+    grad_year: quizData.gradYear
+  });
+
+}
 
     if (DEBUG) {
       const debugBox = document.createElement('div');
