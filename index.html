@@ -72,7 +72,7 @@ header {
 header .logo-wrap a {
   text-decoration: none;
   color: inherit;
-  display: contents; /* preserves your existing flex/block layout */
+  display: contents;
 }
 .logo-name { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 400; letter-spacing: 0.04em; color: var(--text); }
 .logo-name em { font-style: italic; color: var(--gold); }
@@ -352,7 +352,13 @@ main {
   <div class="hero-content">
     <p class="hero-eyebrow">2026 Senior Sessions — Limited Spots</p>
     <div class="hero-stars" style="margin-bottom:10px">
-      <div class="hero-stars-icons"><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg><svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg></div>
+      <div class="hero-stars-icons">
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 20 20" fill="#FBBC04"><path d="M10 1l2.39 4.84 5.34.78-3.86 3.76.91 5.32L10 13.27l-4.78 2.51.91-5.32L2.27 6.62l5.34-.78z"/></svg>
+      </div>
       <span class="hero-stars-label"><strong>5.0</strong> &nbsp;·&nbsp; 67 Google reviews</span>
     </div>
     <h1 class="hero-headline">Senior year is<br><em>one chapter.</em><br>Make it last forever.</h1>
@@ -451,11 +457,11 @@ const STEPS = [
     question: 'What would you love to walk away with?',
     hint: "We'll match you to the package that delivers exactly what you're looking for.",
     options: [
-      { value: 'album',   label: 'A professionally designed heirloom album', sub: 'Something they\'ll take with them into adulthood' },
+      { value: 'album',   label: 'A professionally designed heirloom album', sub: "Something they'll take with them into adulthood" },
       { value: 'wall',    label: 'Custom-framed wall portraits', sub: 'Make your home feel even more meaningful' },
       { value: 'gifts',   label: 'Gift prints and folio boxes', sub: 'For family, grandparents, and loved ones' },
       { value: 'digital', label: 'Digital images for announcements or social media', sub: 'Shareable, printable, and announcement-ready' },
-      { value: 'guided',  label: 'I\'m not sure yet — looking for full-service guidance', sub: 'We\'ll walk you through every option' }
+      { value: 'guided',  label: "I'm not sure yet — looking for full-service guidance", sub: "We'll walk you through every option" }
     ]
   },
   {
@@ -477,7 +483,7 @@ const STEPS = [
     question: 'Be honest — how much planning time do you really have?',
     hint: "No wrong answer. We build an experience around your actual life, not the other way around.",
     options: [
-      { value: 'none',       label: 'Not much — I\'d love for someone to handle every detail', sub: 'Full-service, done-for-you is my dream' },
+      { value: 'none',       label: "Not much — I'd love for someone to handle every detail", sub: 'Full-service, done-for-you is my dream' },
       { value: 'some',       label: 'I can give input, but prefer a streamlined done-for-you experience', sub: null },
       { value: 'handson',    label: 'I enjoy being hands-on and prefer to manage details myself', sub: null }
     ]
@@ -488,7 +494,9 @@ const state = { gradYear: null, products: null, priority: null, planning: null }
 let currentStep = -1;
 const TOTAL = STEPS.length;
 
+// ── FIX: encodeData encodes quiz data to base64 ───────────────────────────────
 function encodeData(data) { return btoa(unescape(encodeURIComponent(JSON.stringify(data)))); }
+
 function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
 function getGradLabel(val) {
@@ -506,7 +514,7 @@ function getPriorityLabel(val) {
 }
 
 function getProductLabel(val) {
-  const map = { album: 'Heirloom Album', wall: 'Wall Portraits', gifts: 'Gift Prints', digital: 'Digital Images', guided: 'Full-Service Guidance' };
+  var map = { album: 'Heirloom Album', wall: 'Wall Portraits', gifts: 'Gift Prints', digital: 'Digital Images', guided: 'Full-Service Guidance' };
   return map[val] || val;
 }
 
@@ -516,14 +524,17 @@ function getPlanningLabel(val) {
   return 'Hands-on';
 }
 
+// ── FIX: calculate() now correctly defines quizData and uses encodeData() ─────
 function calculate() {
-  const { products, priority, planning, gradYear } = state;
+  var products = state.products;
+  var priority = state.priority;
+  var planning = state.planning;
+  var gradYear = state.gradYear;
 
-  let pkgKey = 'heirloom'; // default
+  var pkgKey = 'heirloom'; // default
 
-  // Outdoor photos always require Model For a Day
   if (priority === 'outdoor') {
-    pkgKey = planning === 'none' || products === 'guided' ? 'concierge' : 'heirloom';
+    pkgKey = (planning === 'none' || products === 'guided') ? 'concierge' : 'heirloom';
   } else if (planning === 'none' || products === 'guided' || priority === 'stressfree') {
     pkgKey = 'concierge';
   } else if (products === 'digital' && (priority === 'simple' || planning === 'handson')) {
@@ -536,34 +547,37 @@ function calculate() {
     pkgKey = 'heirloom';
   }
 
-  const Data = {
-    package:   pkgKey,
-    gradYear,
-    products,
-    priority,
-    planning
+  // FIX: quizData is now properly defined here
+  var quizData = {
+    package:  pkgKey,
+    gradYear: gradYear,
+    products: products,
+    priority: priority,
+    planning: planning
   };
 
-  const incomingParams = new URLSearchParams(window.location.search);
-  const fbclid = incomingParams.get('fbclid');
-  const gclid  = incomingParams.get('gclid');
-  const finalParams = new URLSearchParams({ d: encodeQuizData(quizData) });
+  var incomingParams = new URLSearchParams(window.location.search);
+  var fbclid = incomingParams.get('fbclid');
+  var gclid  = incomingParams.get('gclid');
+
+  // FIX: uses encodeData() instead of the undefined encodeQuizData()
+  var finalParams = new URLSearchParams({ d: encodeData(quizData) });
   if (fbclid) finalParams.append('fbclid', fbclid);
   if (gclid)  finalParams.append('gclid',  gclid);
 
-  return { pkgKey, quizData, finalParams };
+  return { pkgKey: pkgKey, quizData: quizData, finalParams: finalParams };
 }
 
 function render() {
-  const content  = document.getElementById('mainContent');
-  const shell    = document.getElementById('progressShell');
-  const nav      = document.getElementById('bottomNav');
-  const fill     = document.getElementById('progressFill');
-  const stepLbl  = document.getElementById('stepLabel');
-  const pctLbl   = document.getElementById('stepPct');
-  const btnBack  = document.getElementById('btnBack');
-  const btnNext  = document.getElementById('btnNext');
-  const dotsEl   = document.getElementById('dots');
+  var content  = document.getElementById('mainContent');
+  var shell    = document.getElementById('progressShell');
+  var nav      = document.getElementById('bottomNav');
+  var fill     = document.getElementById('progressFill');
+  var stepLbl  = document.getElementById('stepLabel');
+  var pctLbl   = document.getElementById('stepPct');
+  var btnBack  = document.getElementById('btnBack');
+  var btnNext  = document.getElementById('btnNext');
+  var dotsEl   = document.getElementById('dots');
 
   // ── INTRO ──
   if (currentStep === -1) {
@@ -585,35 +599,38 @@ function render() {
     pctLbl.textContent = '✓';
     dotsEl.innerHTML = '';
 
-    const { pkgKey, quizData, finalParams } = calculate();
-    const pkg      = PACKAGES[pkgKey];
-    const finalURL = RESULTS_URL + '?' + finalParams.toString();
+    var result    = calculate();
+    var pkgKey    = result.pkgKey;
+    var quizData  = result.quizData;
+    var finalParams = result.finalParams;
 
-    content.innerHTML = `
-      <div class="redirect-screen">
-        <div class="redirect-spinner"></div>
-        <p class="redirect-package">${pkg.emoji} ${pkg.name}</p>
-        <p class="redirect-tagline">${pkg.tagline}</p>
-        <p class="redirect-phrase" id="tws-rotating-phrase">Personalizing your recommendation…</p>
-        <div class="redirect-summary">
-          <div class="summary-row"><span class="summary-label">Graduation</span><span class="summary-value">${getGradLabel(quizData.gradYear)}</span></div>
-          <div class="summary-row"><span class="summary-label">Goal</span><span class="summary-value">${getProductLabel(quizData.products)}</span></div>
-          <div class="summary-row"><span class="summary-label">Priority</span><span class="summary-value">${getPriorityLabel(quizData.priority)}</span></div>
-          <div class="summary-row"><span class="summary-label">Planning style</span><span class="summary-value gold">${getPlanningLabel(quizData.planning)}</span></div>
-        </div>
-      </div>`;
+    var pkg      = PACKAGES[pkgKey];
+    var finalURL = RESULTS_URL + '?' + finalParams.toString();
 
-    const PHRASES = [
-      'Personalizing your recommendation…',
-      'Matching you to the right experience…',
-      'Building your custom overview…',
-      'Checking package details…',
-      'Almost ready…'
+    content.innerHTML = '<div class="redirect-screen">'
+      + '<div class="redirect-spinner"></div>'
+      + '<p class="redirect-package">' + pkg.emoji + ' ' + pkg.name + '</p>'
+      + '<p class="redirect-tagline">' + pkg.tagline + '</p>'
+      + '<p class="redirect-phrase" id="tws-rotating-phrase">Personalizing your recommendation\u2026</p>'
+      + '<div class="redirect-summary">'
+      + '<div class="summary-row"><span class="summary-label">Graduation</span><span class="summary-value">' + getGradLabel(quizData.gradYear) + '</span></div>'
+      + '<div class="summary-row"><span class="summary-label">Goal</span><span class="summary-value">' + getProductLabel(quizData.products) + '</span></div>'
+      + '<div class="summary-row"><span class="summary-label">Priority</span><span class="summary-value">' + getPriorityLabel(quizData.priority) + '</span></div>'
+      + '<div class="summary-row"><span class="summary-label">Planning style</span><span class="summary-value gold">' + getPlanningLabel(quizData.planning) + '</span></div>'
+      + '</div>'
+      + '</div>';
+
+    var PHRASES = [
+      'Personalizing your recommendation\u2026',
+      'Matching you to the right experience\u2026',
+      'Building your custom overview\u2026',
+      'Checking package details\u2026',
+      'Almost ready\u2026'
     ];
 
-    const el = document.getElementById('tws-rotating-phrase');
+    var el = document.getElementById('tws-rotating-phrase');
     if (el) {
-      let idx = 0;
+      var idx = 0;
       setInterval(function() {
         idx = (idx + 1) % PHRASES.length;
         el.style.opacity = '0';
@@ -621,39 +638,36 @@ function render() {
       }, 1500);
     }
 
-// ── FACEBOOK PIXEL: QUIZ COMPLETION ──
-if (typeof fbq === 'function') {
+    // ── FACEBOOK PIXEL: QUIZ COMPLETION ──
+    if (typeof fbq === 'function') {
+      fbq('init', '1484618222285119', {
+        em: '',
+        ph: '',
+        fn: '',
+        ln: ''
+      });
 
-  // Re-init with matched user data collected during quiz
-  fbq('init', '1484618222285119', {
-    em: (quizData.email || '').toLowerCase().trim(),
-    ph: (quizData.phone || '').replace(/\D/g, ''),
-    fn: (quizData.firstName || '').toLowerCase().trim(),
-    ln: (quizData.lastName || '').toLowerCase().trim(),
-  });
+      fbq('track', 'Lead', {
+        content_name: 'Calculator Complete',
+        content_type: 'quiz',
+        value: 0,
+        currency: 'USD'
+      });
 
-  fbq('track', 'Lead', {
-    content_name: 'Calculator Complete',
-    content_type: 'quiz',
-    value: 0,
-    currency: 'USD'
-  });
-
-  fbq('trackCustom', 'SeniorQuizComplete', {
-    package: pkg.name,
-    grad_year: quizData.gradYear
-  });
-
-}
+      fbq('trackCustom', 'SeniorQuizComplete', {
+        package: pkg.name,
+        grad_year: quizData.gradYear
+      });
+    }
 
     if (DEBUG) {
-      const debugBox = document.createElement('div');
+      var debugBox = document.createElement('div');
       debugBox.style.cssText = 'margin:20px auto;max-width:360px;background:white;border:2px solid #C7B27A;border-radius:8px;padding:20px;text-align:left;font-size:12px;word-break:break-all;';
-      debugBox.innerHTML = '<p style="font-weight:600;margin-bottom:8px;color:#2E2F2C">🔍 DEBUG: Redirect URL</p>'
+      debugBox.innerHTML = '<p style="font-weight:600;margin-bottom:8px;color:#2E2F2C">\uD83D\uDD0D DEBUG: Redirect URL</p>'
         + '<p style="color:#6B6E6A;margin-bottom:12px">Auto-redirect is paused. Tap to test:</p>'
         + '<a href="' + finalURL + '" style="color:#7C8A5A;text-decoration:underline;line-height:1.6">' + finalURL + '</a>'
         + '<p style="margin-top:12px;color:#6B6E6A">Decoded data:<br><span style="color:#2E2F2C">' + JSON.stringify(quizData, null, 2).replace(/\n/g,'<br>').replace(/ /g,'&nbsp;') + '</span></p>'
-        + '<p style="margin-top:12px;color:#7C8A5A;font-weight:600">✓ Pixel events fired:<br><span style="color:#2E2F2C">Lead + SeniorQuizComplete</span></p>';
+        + '<p style="margin-top:12px;color:#7C8A5A;font-weight:600">\u2713 Pixel events fired:<br><span style="color:#2E2F2C">Lead + SeniorQuizComplete</span></p>';
       document.querySelector('.redirect-screen').appendChild(debugBox);
     } else {
       setTimeout(function() { window.location.href = finalURL; }, 2200);
@@ -662,41 +676,45 @@ if (typeof fbq === 'function') {
   }
 
   // ── QUIZ STEP ──
-  const step = STEPS[currentStep];
-  const pct  = Math.round(((currentStep + 1) / TOTAL) * 100);
+  var step = STEPS[currentStep];
+  var pct  = Math.round(((currentStep + 1) / TOTAL) * 100);
   shell.style.display = 'block'; nav.style.display = 'flex';
   fill.style.width = pct + '%';
   stepLbl.textContent = 'Step ' + (currentStep + 1) + ' of ' + TOTAL;
   pctLbl.textContent  = pct + '%';
   btnBack.style.display = currentStep === 0 ? 'none' : '';
   btnNext.disabled = !state[step.id];
-  btnNext.textContent = currentStep === TOTAL - 1 ? 'See My Results →' : 'Continue →';
+  btnNext.textContent = currentStep === TOTAL - 1 ? 'See My Results \u2192' : 'Continue \u2192';
 
   dotsEl.innerHTML = '';
-  for (let i = 0; i < TOTAL; i++) {
-    const d = document.createElement('div');
+  for (var i = 0; i < TOTAL; i++) {
+    var d = document.createElement('div');
     d.className = 'dot' + (i === currentStep ? ' active' : i < currentStep ? ' done' : '');
     dotsEl.appendChild(d);
   }
 
-  content.innerHTML = `
-    <div class="question-wrap">
-      <h2 class="question-headline">${step.question}</h2>
-      ${step.hint ? '<p class="question-hint">' + step.hint + '</p>' : ''}
-      <div class="options-list">
-        ${step.options.map(function(o) {
-          const sel = state[step.id] === o.value ? 'selected' : '';
-          return '<button class="opt-btn ' + sel + '" onclick="selectOpt(\'' + step.id + '\',\'' + o.value + '\',this)">'
-            + '<span class="opt-check"></span>'
-            + '<span class="opt-text">'
-            + '<span class="opt-label">' + o.label + '</span>'
-            + (o.sub ? '<span class="opt-sub">' + o.sub + '</span>' : '')
-            + '</span></button>';
-        }).join('')}
-      </div>
-      <p class="val-msg" id="valMsg"></p>
-    </div>`;
+  var optionsHTML = '';
+  for (var j = 0; j < step.options.length; j++) {
+    var o = step.options[j];
+    var sel = state[step.id] === o.value ? 'selected' : '';
+    optionsHTML += '<button class="opt-btn ' + sel + '" onclick="selectOpt(\'' + step.id + '\',\'' + o.value + '\',this)">'
+      + '<span class="opt-check"></span>'
+      + '<span class="opt-text">'
+      + '<span class="opt-label">' + o.label + '</span>'
+      + (o.sub ? '<span class="opt-sub">' + o.sub + '</span>' : '')
+      + '</span></button>';
+  }
+
+  content.innerHTML = '<div class="question-wrap">'
+    + '<h2 class="question-headline">' + step.question + '</h2>'
+    + (step.hint ? '<p class="question-hint">' + step.hint + '</p>' : '')
+    + '<div class="options-list">' + optionsHTML + '</div>'
+    + '<p class="val-msg" id="valMsg"></p>'
+    + '</div>';
 }
+
+// ── FIX: start() added as alias for startQuiz() — hero buttons call start() ──
+function start() { startQuiz(); }
 
 function startQuiz() {
   document.getElementById('heroCtaFixed').classList.remove('visible');
@@ -712,8 +730,8 @@ function selectOpt(id, value, el) {
 }
 
 function goNext() {
-  const step = STEPS[currentStep];
-  const msg  = document.getElementById('valMsg');
+  var step = STEPS[currentStep];
+  var msg  = document.getElementById('valMsg');
   if (step && !state[step.id]) {
     if (msg) { msg.style.display = 'block'; msg.textContent = 'Please make a selection.'; }
     return;
@@ -726,7 +744,7 @@ function goBack() {
   else { currentStep = -1; render(); }
 }
 
-const _startParams = new URLSearchParams(window.location.search);
+var _startParams = new URLSearchParams(window.location.search);
 if (_startParams.get('start') === '1') { currentStep = 0; }
 render();
 </script>
